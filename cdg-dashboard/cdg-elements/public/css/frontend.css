@@ -1,0 +1,65 @@
+.cdg-elements-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	pointer-events: none;
+	z-index: 1000;
+	overflow: hidden;
+}
+
+.cdg-element {
+	position: fixed;
+	display: inline-block;
+	white-space: nowrap;
+	will-change: transform;
+	transition: opacity 0.3s ease;
+	opacity: 0;
+}
+
+.cdg-element.is-visible {
+	opacity: 1;
+}
+
+/* Layering System */
+.cdg-below {
+	position: relative;
+	z-index: 1001;
+}
+
+.cdg-above {
+	position: relative;
+	z-index: 999;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+	.cdg-element {
+		transform-origin: left top;
+	}
+}
+
+/* Performance Optimizations */
+.has-cdg-elements {
+	transform-style: preserve-3d;
+	backface-visibility: hidden;
+	perspective: 1000px;
+}
+
+/* Element Size Classes */
+.cdg-element.x-small {
+	font-size: 12px;
+}
+
+.cdg-element.small {
+	font-size: 16px;
+}
+
+.cdg-element.medium {
+	font-size: 24px;
+}
+
+.cdg-element.large {
+	font-size: 36px;
+}
