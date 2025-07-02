@@ -1,0 +1,38 @@
+<?php
+/**
+ * Fired during plugin activation.
+ */
+class Quick_Tools_Activator {
+
+    /**
+     * Activate the plugin.
+     */
+    public static function activate() {
+        // Set default options
+        $default_settings = array(
+            'show_documentation_widgets' => true,
+            'documentation_widget_limit' => 5,
+            'show_documentation_status' => true,
+            'show_cpt_widgets' => true,
+            'selected_cpts' => array(),
+            'show_recent_posts' => true,
+            'recent_posts_limit' => 3,
+        );
+
+        // Only set defaults if no settings exist
+        if (!get_option('quick_tools_settings')) {
+            add_option('quick_tools_settings', $default_settings);
+        }
+
+        // Register post type and taxonomy to create rewrite rules
+        $documentation = new Quick_Tools_Documentation();
+        $documentation->register_post_type();
+        $documentation->register_taxonomy();
+
+        // Flush rewrite rules
+        flush_rewrite_rules();
+
+        // Set activation flag for any welcome messages
+        add_option('quick_tools_activated', true);
+    }
+}
